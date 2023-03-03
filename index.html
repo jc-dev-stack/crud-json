@@ -12,84 +12,84 @@
     ></script>
   </head>
   <body>
-    <div class="modal" id="modal">
-      <div class="container-modal">
-        <div class="header-modal-editar">
-          <h3>Editar produto</h3>
-          <button id="close-modal-xmark">
-            <i class="fa-sharp fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <div class="content-modal">
-          <div class="form">
-            <input id="id" style="display: none" />
-            <div class="container-input">
-              <label for="name">Nome do produto: </label><br />
-              <input
-                type="text"
-                class="input"
-                id="name-editar"
-                placeholder="Digite o nome do produto..."
-              />
-            </div>
-            <div class="container-input">
-              <label for="name">Preço do produto: </label><br />
-              <input
-                type="number"
-                class="input"
-                id="price-editar"
-                placeholder="Digite o preço do produto..."
-              />
-            </div>
-            <div class="container-input container-quant">
-              <label for="name">Quantidade do produto: </label><br />
-              <input
-                type="number"
-                class="input"
-                id="quant-editar"
-                placeholder="Digite a quantidade do produto..."
-              />
-            </div>
-            <button class="btn-editar" id="editar">Salvar alterações</button>
-          </div>
-        </div>
-        <div class="footer-modal">
-          <button id="fechar-modal-edit">Fechar</button>
-        </div>
-      </div>
-    </div>
-    <div class="modal" id="modal-excluir">
-      <div class="container-modal">
-        <div class="header-modal-excluir">
-          <h3>Excluir produto</h3>
-          <button id="close-modal-xmark-excluir">
-            <i class="fa-sharp fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <div class="content-modal">
-          <input id="id-excluir" style="display: none" />
-          <h4>Você deseja excluir esse produto ?</h4>
-          <div id="produto-excluir"></div>
-          <br />
-          <div
-            style="
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-            "
-          >
-            <strong style="color: red">Essa ação é irreversível</strong><br />
-            <button class="deleteAll" id="excluir-perma">
-              Excluir permanentemente
+    <main>
+      <div class="modal" id="modal">
+        <div class="container-modal">
+          <div class="header-modal-editar">
+            <h3>Editar produto</h3>
+            <button id="close-modal-xmark">
+              <i class="fa-sharp fa-solid fa-xmark"></i>
             </button>
           </div>
-        </div>
-        <div class="footer-modal">
-          <button id="fechar-modal-excluir">Fechar</button>
+          <div class="content-modal">
+            <div class="form">
+              <input id="id" style="display: none" />
+              <div class="container-input">
+                <label for="name">Nome do produto: </label><br />
+                <input
+                  type="text"
+                  class="input"
+                  id="name-editar"
+                  placeholder="Digite o nome do produto..."
+                />
+              </div>
+              <div class="container-input">
+                <label for="name">Preço do produto: </label><br />
+                <input
+                  type="number"
+                  class="input"
+                  id="price-editar"
+                  placeholder="Digite o preço do produto..."
+                />
+              </div>
+              <div class="container-input container-quant">
+                <label for="name">Quantidade do produto: </label><br />
+                <input
+                  type="number"
+                  class="input"
+                  id="quant-editar"
+                  placeholder="Digite a quantidade do produto..."
+                />
+              </div>
+              <button class="btn-editar" id="editar">Salvar alterações</button>
+            </div>
+          </div>
+          <div class="footer-modal">
+            <button id="fechar-modal-edit">Fechar</button>
+          </div>
         </div>
       </div>
-    </div>
-    <main>
+      <div class="modal" id="modal-excluir">
+        <div class="container-modal">
+          <div class="header-modal-excluir">
+            <h3>Excluir produto</h3>
+            <button id="close-modal-xmark-excluir">
+              <i class="fa-sharp fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <div class="content-modal">
+            <input id="id-excluir" style="display: none" />
+            <h4>Você deseja excluir esse produto ?</h4>
+            <div id="produto-excluir"></div>
+            <br />
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <strong style="color: red">Essa ação é irreversível</strong><br />
+              <button class="deleteAll" id="excluir-perma">
+                Excluir permanentemente
+              </button>
+            </div>
+          </div>
+          <div class="footer-modal">
+            <button id="fechar-modal-excluir">Fechar</button>
+          </div>
+        </div>
+      </div>
       <div class="container">
         <div class="form">
           <div class="container-input">
