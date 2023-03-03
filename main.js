@@ -191,7 +191,7 @@ function excluir() {
 /* CARREGAR LISTA DE PRODUTOS */
 function loadProduct(product) {
   const tr = document.createElement("tr");
-  const formatMoney = parseInt(12.0).toLocaleString("pt-br", {
+  const formatMoney = parseInt(product.price).toLocaleString("pt-br", {
     style: "currency",
     currency: "BRL",
   });
