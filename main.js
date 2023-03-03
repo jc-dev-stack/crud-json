@@ -126,6 +126,14 @@ function validarInputs() {
   if (!name || !price || !quant) {
     alert("Preencha os campos corretamete");
     return false;
+  } else if (price <= 0 || quant <= 0) {
+    alert(
+      "O campo preço e quantidade não pode ser menor que zero ou igual a zero"
+    );
+    return false;
+  } else if (name == "") {
+    alert("O campo nome não pode ser vazio");
+    return false;
   }
   return {
     name,
@@ -137,6 +145,14 @@ function validarInputsEdit() {
   const { id, name, price, quant } = pegarValorInputsEdit();
   if (!id || !name || !price || !quant) {
     alert("Preencha os campos corretamete");
+    return false;
+  } else if (price <= 0 || quant <= 0) {
+    alert(
+      "O campo preço e quantidade não pode ser menor que zero ou igual a zero"
+    );
+    return false;
+  } else if (name == "") {
+    alert("O campo nome não pode ser vazio");
     return false;
   }
   return {
