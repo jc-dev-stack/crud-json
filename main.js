@@ -191,10 +191,15 @@ function excluir() {
 /* CARREGAR LISTA DE PRODUTOS */
 function loadProduct(product) {
   const tr = document.createElement("tr");
+  const formatMoney = parseInt(12.0).toLocaleString("pt-br", {
+    style: "currency",
+    currency: "BRL",
+  });
+  // R$ 12,00
   tr.innerHTML = `
   <td>${product.id}</td>
   <td>${product.name}</td>
-  <td>${product.price}</td>
+  <td>${formatMoney}</td>
   <td>${product.quant}</td>
   <td>
     <div class="container-actions">
@@ -250,8 +255,7 @@ function showModalExcluir(id) {
   const product = productControler.getProductById(id);
   document.querySelector("#id-excluir").value = id;
   const container = document.querySelector("#produto-excluir");
-  console.log(typeof product.price);
-  const formatMoney = product.price.toLocaleString("pt-br", {
+  const formatMoney = parseInt(product.price).toLocaleString("pt-br", {
     style: "currency",
     currency: "BRL",
   });
