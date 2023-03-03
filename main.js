@@ -195,7 +195,6 @@ function loadProduct(product) {
     style: "currency",
     currency: "BRL",
   });
-  // R$ 12,00
   tr.innerHTML = `
   <td>${product.id}</td>
   <td>${product.name}</td>
