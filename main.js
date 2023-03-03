@@ -108,61 +108,43 @@ const btnCloseXMarkDelete = document.querySelector(
 );
 const btnExcluirPerma = document.querySelector("#excluir-perma");
 const btnCloseModalExcluir = document.querySelector("#fechar-modal-excluir");
-function pegarValorInputs() {
-  const name = document.querySelector("#name").value;
-  const price = document.querySelector("#price").value;
-  const quant = document.querySelector("#quant").value;
-  return { name, price, quant };
-}
-function pegarValorInputsEdit() {
-  const id = document.querySelector("#id").value;
-  const name = document.querySelector("#name-editar").value;
-  const price = document.querySelector("#price-editar").value;
-  const quant = document.querySelector("#quant-editar").value;
-  return { id, name, price, quant };
-}
-function validarInputs() {
-  const { name, price, quant } = pegarValorInputs();
-  if (!name || !price || !quant) {
-    alert("Preencha os campos corretamete");
-    return false;
-  } else if (price <= 0 || quant <= 0) {
-    alert(
-      "O campo preço e quantidade não pode ser menor que zero ou igual a zero"
-    );
-    return false;
-  } else if (name == "") {
-    alert("O campo nome não pode ser vazio");
-    return false;
-  }
-  return {
-    name,
-    price,
-    quant,
-  };
-}
-function validarInputsEdit() {
-  const { id, name, price, quant } = pegarValorInputsEdit();
-  if (!id || !name || !price || !quant) {
-    alert("Preencha os campos corretamete");
-    return false;
-  } else if (price <= 0 || quant <= 0) {
-    alert(
-      "O campo preço e quantidade não pode ser menor que zero ou igual a zero"
-    );
-    return false;
-  } else if (name == "") {
-    alert("O campo nome não pode ser vazio");
-    return false;
-  }
-  return {
-    id,
-    name,
-    price,
-    quant,
-  };
-}
 
+function getAndValidateInputs(array) {
+  const inputs = [];
+  array.forEach((inputConfig) => {
+    const value = document.querySelector(`#${inputConfig.idInput}`).value;
+
+    inputConfig.validates.forEach((configs) => {
+      if (configs.type == "isnull") {
+        if (value == null || value.trim() == "" || value == "") {
+          alert(
+            `${
+              configs.messageError ??
+              `${inputConfig.nameOfInput} can not be null `
+            }`
+          );
+          return false;
+        }
+      }
+      if (configs.type == "lessOrEqualZero") {
+        if (value <= 0) {
+          alert(
+            `${
+              configs.messageError ??
+              `${inputConfig.nameOfInput} can not be less or equal than 0 `
+            }`
+          );
+          return false;
+        }
+      }
+      inputs.push({
+        nameInput: inputConfig.nameOfInput,
+        value,
+      });
+    });
+  });
+  return inputs;
+}
 function clearInputs() {
   document.querySelector("#name").value = "";
   document.querySelector("#price").value = "";
@@ -175,18 +157,83 @@ function clearTable() {
 
 /* CARREGAR LISTA DE PRODUTOS */
 function cadastrar() {
-  const { name, price, quant } = validarInputs();
-  if (name) {
-    productControler.createProduct(name, price, quant);
+  const [name, price, quant] = getAndValidateInputs([
+    {
+      idInput: "name",
+      nameOfInput: "name",
+      validates: [
+        {
+          type: "isnull",
+          messageError: "O campo nome não pode ser vazio!",
+        },
+      ],
+    },
+    {
+      idInput: "price",
+      nameOfInput: "price",
+      validates: [
+        {
+          type: "lessOrEqualZero",
+          messageError: "O campo preço não pode ser igual ou menor que 0",
+        },
+      ],
+    },
+    {
+      idInput: "quant",
+      nameOfInput: "quant",
+      validates: [
+        {
+          type: "lessOrEqualZero",
+          messageError:
+            "O campo de quantidade não pode ser igual ou menor que 0",
+        },
+      ],
+    },
+  ]);
+  if (name && price && quant) {
+    productControler.createProduct(name.value, price.value, quant.value);
     clearInputs();
     clearTable();
     loadListOfProduct();
   }
 }
 function editar() {
-  const { id, name, price, quant } = validarInputsEdit();
+  const [name, price, quant] = getAndValidateInputs([
+    {
+      idInput: "name-editar",
+      nameOfInput: "name",
+      validates: [
+        {
+          type: "isnull",
+          messageError: "O campo nome não pode ser vazio!",
+        },
+      ],
+    },
+    {
+      idInput: "price-editar",
+      nameOfInput: "price",
+      validates: [
+        {
+          type: "lessOrEqualZero",
+          messageError: "O campo preço não pode ser igual ou menor que 0",
+        },
+      ],
+    },
+    {
+      idInput: "quant-editar",
+      nameOfInput: "quant",
+      validates: [
+        {
+          type: "lessOrEqualZero",
+          messageError:
+            "O campo de quantidade não pode ser igual ou menor que 0",
+        },
+      ],
+    },
+  ]);
+  const id = document.querySelector("#id").value;
   if (id) {
-    productControler.updateProduct(id, name, price, quant);
+    productControler.updateProduct(id, name.value, price.value, quant.value);
     closeModal("modal");
     clearTable();
     loadListOfProduct();
@@ -282,12 +329,10 @@ function showModalExcluir(id) {
   `;
   openModal("modal-excluir");
 }
-
 function openModal(id) {
   const modal = document.querySelector(`#${id}`);
   modal.style.display = "block";
 }
-
 function closeModal(id) {
   const modal = document.querySelector(`#${id}`);
   modal.style.display = "none";
